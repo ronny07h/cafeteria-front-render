@@ -1,0 +1,243 @@
+/* Accessibility Panel Styles */
+
+.accessibility-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #0d6efd;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 9998;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accessibility-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.accessibility-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+
+.accessibility-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2c2c2c;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.accessibility-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid #444;
+}
+
+.accessibility-panel-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.close-btn {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: white;
+  color: #2c2c2c;
+}
+
+.accessibility-panel-body {
+  padding: 20px;
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.control-btn {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-height: 80px;
+}
+
+.control-btn i {
+  font-size: 1.5rem;
+}
+
+.control-btn:hover:not(:disabled) {
+  background: white;
+  color: #2c2c2c;
+  transform: translateY(-2px);
+}
+
+.control-btn.active {
+  background: #667eea;
+  border-color: #667eea;
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reset-btn {
+  width: 100%;
+  background: #dc3545;
+  border: none;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+}
+
+/* Accessibility Effects */
+
+#accessible-content {
+  background-color: var(--bs-body-bg, #ffffff);
+  min-height: 100vh;
+  transition: filter 0.3s ease;
+}
+
+#accessible-content.high-contrast {
+  filter: contrast(150%);
+}
+
+#accessible-content.highlight-links a {
+  background: yellow !important;
+  color: black !important;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+#accessible-content.grayscale {
+  filter: grayscale(100%);
+}
+
+#accessible-content.invert-colors {
+  filter: invert(100%);
+}
+
+#accessible-content.invert-colors img,
+#accessible-content.invert-colors video {
+  filter: invert(100%);
+}
+
+#accessible-content.no-animations * {
+  animation: none !important;
+  transition: none !important;
+}
+
+#accessible-content.remove-styles {
+  background: white !important;
+  color: black !important;
+}
+
+#accessible-content.remove-styles * {
+  background: white !important;
+  color: black !important;
+  font-family: Arial, sans-serif !important;
+}
+
+#accessible-content.large-cursor,
+#accessible-content.large-cursor * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="black" stroke="white" stroke-width="1" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>')
+      12 12,
+    auto !important;
+}
+
+#accessible-content.monochrome {
+  filter: grayscale(100%) contrast(120%);
+}
+
+#accessible-content.sepia {
+  filter: sepia(100%);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .accessibility-panel {
+    width: 95%;
+  }
+
+  .control-btn {
+    font-size: 0.75rem;
+    padding: 10px;
+    min-height: 70px;
+  }
+
+  .control-btn i {
+    font-size: 1.2rem;
+  }
+}
