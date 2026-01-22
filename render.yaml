@@ -6,4 +6,4 @@ services:
     branch: main
     envVars:
       - key: VITE_API_URL
-        sync: false # User will input this in dashboard, or we can set a placeholder
+        value: https://cafeteria-backend-bn7o.onrender.com/api
