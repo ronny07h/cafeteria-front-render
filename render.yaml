@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: cafeteria-react
+    runtime: docker
+    plan: free
+    branch: main
+    envVars:
+      - key: VITE_API_URL
+        sync: false # User will input this in dashboard, or we can set a placeholder
