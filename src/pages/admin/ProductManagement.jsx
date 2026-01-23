@@ -91,8 +91,13 @@ const ProductManagement = () => {
 
     try {
       const productData = {
-        ...formData,
-        categoryId: parseInt(formData.categoryId),
+        name: formData.name,
+        description: formData.description,
+        price: parseFloat(formData.price),
+        imageUrl: formData.imageUrl,
+        category: {
+          id: parseInt(formData.categoryId),
+        },
       };
 
       if (editingProduct) {
