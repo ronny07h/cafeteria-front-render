@@ -10,9 +10,13 @@ const authService = {
                 password
             });
             
+            console.log('Login API Response:', response.data);
             if (response.data.token) {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('username', response.data.username);
+                console.log('Token saved to localStorage:', response.data.token);
+            } else {
+                console.warn('No token found in response.data!', response.data);
             }
             
             return response.data;
