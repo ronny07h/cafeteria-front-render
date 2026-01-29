@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
+import { eventBus } from "../services/api";
 
 const NotificationContext = createContext();
 
@@ -24,6 +31,19 @@ export const NotificationProvider = ({ children }) => {
       removeNotification(id);
     }, 5000);
   }, []);
+
+  useEffect(() => {
+    const handleSuccess = (msg) => addNotification(msg, "success");
+    const handleError = (msg) => addNotification(msg, "error");
+
+    eventBus.on("api:success", handleSuccess);
+    eventBus.on("api:error", handleError);
+
+    return () => {
+      eventBus.remove("api:success", handleSuccess);
+      eventBus.remove("api:error", handleError);
+    };
+  }, [addNotification]);
 
   const removeNotification = useCallback((id) => {
     setNotifications((prev) =>

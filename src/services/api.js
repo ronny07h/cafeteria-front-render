@@ -43,8 +43,12 @@ api.interceptors.response.use(
   (response) => {
     // Show success message for non-GET requests if desired
     if (['post', 'put', 'delete'].includes(response.config.method)) {
-        // We can dispatch success here if we want generic success messages
-        // But usually custom messages are better.
+        let message = 'Operación realizada con éxito.';
+        if (response.config.method === 'post') message = 'Guardado exitosamente.';
+        if (response.config.method === 'put') message = 'Actualizado exitosamente.';
+        if (response.config.method === 'delete') message = 'Eliminado exitosamente.';
+        
+        eventBus.dispatch('api:success', message);
     }
     return response;
   },
