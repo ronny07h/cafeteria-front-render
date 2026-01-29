@@ -67,8 +67,8 @@ const News = () => {
                       : news.content}
                   </p>
                 </div>
-                <div className="card-footer bg-white border-0">
-                  <small className="text-muted">
+                <div className="card-footer border-0">
+                  <small>
                     Publicado el{" "}
                     {new Date(news.publicationDate).toLocaleDateString()}
                   </small>
