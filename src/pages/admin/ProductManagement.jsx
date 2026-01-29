@@ -107,10 +107,11 @@ const ProductManagement = () => {
       }
 
       await loadData();
+      await loadData();
       handleCloseModal();
     } catch (err) {
       console.error("Error saving product:", err);
-      alert("Error al guardar el producto. Por favor, intenta de nuevo.");
+      // Global interceptor handles error notification
     }
   };
 
@@ -121,7 +122,7 @@ const ProductManagement = () => {
         await loadData();
       } catch (err) {
         console.error("Error deleting product:", err);
-        alert("Error al eliminar el producto. Por favor, intenta de nuevo.");
+        // Global interceptor handles error notification
       }
     }
   };

@@ -43,7 +43,8 @@ const NewsManagement = () => {
       resetForm();
       loadNews();
     } catch (err) {
-      alert("Error al guardar la noticia");
+      console.error("Error saving news:", err);
+      // Global interceptor handles error notification
     }
   };
 
@@ -53,7 +54,8 @@ const NewsManagement = () => {
         await newsService.deleteNews(id);
         loadNews();
       } catch (err) {
-        alert("Error al eliminar");
+        console.error("Error deleting news:", err);
+        // Global interceptor handles error notification
       }
     }
   };
