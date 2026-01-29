@@ -31,21 +31,22 @@ const Footer = () => {
           </div>
           <div className="col-md-6 text-center text-md-end">
             <a
-              href="#"
+              href="https://www.facebook.com/ronny.sanchez.31924?locale=es_LA"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-body-secondary me-3"
               aria-label="Facebook"
             >
               <i className="fab fa-facebook fa-lg"></i>
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/aandy__bc/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-body-secondary me-3"
               aria-label="Instagram"
             >
               <i className="fab fa-instagram fa-lg"></i>
-            </a>
-            <a href="#" className="text-body-secondary" aria-label="Twitter">
-              <i className="fab fa-twitter fa-lg"></i>
             </a>
           </div>
         </div>
