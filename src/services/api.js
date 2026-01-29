@@ -7,14 +7,29 @@ const api = axios.create({
   },
 });
 
+// Note: To avoid circular dependency or complex prop drilling, 
+// we will start with simple console logs here, but arguably 
+// the interceptor should trigger an event that the Context listens to.
+// However, a simpler approach for now without major refactor is to dispatch a custom event.
+
+export const eventBus = {
+  on(event, callback) {
+    document.addEventListener(event, (e) => callback(e.detail));
+  },
+  dispatch(event, data) {
+    document.dispatchEvent(new CustomEvent(event, { detail: data }));
+  },
+  remove(event, callback) {
+    document.removeEventListener(event, callback);
+  },
+};
+
 // Request interceptor to add JWT token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
-    console.log('Attaching Token to request:', token ? 'Token exists' : 'No token found');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      console.log('Authorization Header set:', config.headers.Authorization);
     }
     return config;
   },
@@ -25,9 +40,33 @@ api.interceptors.request.use(
 
 // Response interceptor for error handling
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Show success message for non-GET requests if desired
+    if (['post', 'put', 'delete'].includes(response.config.method)) {
+        // We can dispatch success here if we want generic success messages
+        // But usually custom messages are better.
+    }
+    return response;
+  },
   (error) => {
-    console.error('API Error:', error);
+    // Dispatch error event
+    let message = 'Ocurrió un error inesperado.';
+    if (error.response) { // Server responded
+        if (error.response.data && typeof error.response.data === 'object') {
+             // Handle Validation Errors map
+             const data = error.response.data;
+             if (Object.keys(data).length > 0 && !data.error && !data.message) {
+                 // Assume it's a map of field->error
+                 message = Object.values(data).join(', ');
+             } else {
+                 message = data.message || data.error || message;
+             }
+        }
+    } else if (error.request) { // No response
+        message = 'No hay respuesta del servidor. Compruebe su conexión.';
+    }
+    
+    eventBus.dispatch('api:error', message);
     return Promise.reject(error);
   }
 );

@@ -13,6 +13,7 @@ const AccessibilityPanel = () => {
     largeCursor: false,
     monochrome: false,
     sepia: false,
+    darkMode: false,
   });
 
   useEffect(() => {
@@ -30,6 +31,13 @@ const AccessibilityPanel = () => {
   const applySettings = () => {
     const root = document.documentElement;
     root.style.fontSize = `${settings.fontSize}%`;
+
+    // Dark Mode
+    if (settings.darkMode) {
+      root.setAttribute("data-bs-theme", "dark");
+    } else {
+      root.setAttribute("data-bs-theme", "light");
+    }
 
     const toggleClass = (className, enabled) => {
       const content = document.getElementById("accessible-content");
@@ -86,6 +94,7 @@ const AccessibilityPanel = () => {
       largeCursor: false,
       monochrome: false,
       sepia: false,
+      darkMode: false,
     });
   };
 
@@ -160,6 +169,21 @@ const AccessibilityPanel = () => {
                 >
                   <i className="fas fa-font fs-4 mb-2"></i>
                   <span className="fw-bold">A+</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Dark Mode Control */}
+            <div className="row g-2 mb-3">
+              <div className="col-12">
+                <button
+                  className={`btn w-100 d-flex flex-column align-items-center py-3 ${
+                    settings.darkMode ? "btn-primary" : "btn-outline-light"
+                  }`}
+                  onClick={() => toggleSetting("darkMode")}
+                >
+                  <i className="fas fa-moon fs-4 mb-2"></i>
+                  <span className="fw-bold small">MODO OSCURO</span>
                 </button>
               </div>
             </div>

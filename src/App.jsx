@@ -17,10 +17,11 @@ import NewsManagement from "./pages/admin/NewsManagement";
 import CompanyConfig from "./pages/admin/CompanyConfig";
 import AccessibilityPanel from "./components/common/AccessibilityPanel";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { NotificationProvider } from "./context/NotificationContext";
 
 function App() {
   return (
-    <>
+    <NotificationProvider>
       <div id="accessible-content" className="App">
         <Routes>
           {/* Public Routes */}
@@ -75,7 +76,7 @@ function App() {
         </Routes>
       </div>
       <AccessibilityPanel />
-    </>
+    </NotificationProvider>
   );
 }
 
