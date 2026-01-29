@@ -25,7 +25,9 @@ body {
   line-height: 1.6;
   color: var(--dark-color);
   background-color: #ffffff;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 h1,
@@ -58,7 +60,8 @@ h6 {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(13, 110, 253, 0.85);
+  background: var(--primary-color);
+  opacity: 0.85;
 }
 
 .hero-content {
@@ -69,14 +72,13 @@ h6 {
 
 /* Card Styles */
 .card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: none;
+  box-shadow: none;
 }
 
 .card-img-top {
@@ -111,12 +113,12 @@ h6 {
 .btn {
   font-family: var(--font-primary);
   font-weight: 500;
-  transition: all 0.3s ease;
+  border-radius: 4px;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: none;
+  box-shadow: none;
 }
 
 /* Loading Spinner */
@@ -167,13 +169,57 @@ h6 {
 
 /* Dark Mode Support */
 [data-bs-theme="dark"] body {
-  background-color: #212529;
-  color: #f8f9fa;
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .admin-panel {
+  background-color: #121212;
 }
 
 [data-bs-theme="dark"] .card {
-  background-color: #343a40;
-  color: #f8f9fa;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border-color: #333;
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+  background-color: #2c2c2c;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .form-control:focus,
+[data-bs-theme="dark"] .form-select:focus {
+  background-color: #333;
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .table {
+  color: #e0e0e0;
+  border-color: #333;
+}
+
+[data-bs-theme="dark"] .table-light {
+  background-color: #2c2c2c;
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .modal-content {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border-color: #333;
+}
+
+[data-bs-theme="dark"] .modal-header,
+[data-bs-theme="dark"] .modal-footer {
+  border-color: #333;
+}
+
+[data-bs-theme="dark"] .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
 }
 
 /* Animations */
